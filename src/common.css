@@ -1,0 +1,14 @@
+.hide {
+    display: none;
+}
+
+.cat-info {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.error {
+    color: tomato;
+    font-size: 20px;
+}

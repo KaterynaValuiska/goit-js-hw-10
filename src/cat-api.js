@@ -1,5 +1,7 @@
 const breedSelect = document.querySelector('.breed-select');
 const catInfo = document.querySelector('.cat-info');
+const loaderMess = document.querySelector('.loader');
+const errorMess = document.querySelector('.error');
 
 function fetchBreeds() {
     fetch("https://api.thecatapi.com/v1/breeds")
@@ -27,16 +29,18 @@ function renderBreed(breeds) {
 
    
 function onSelectCat() {
-    let index = breedSelect.selectedIndex;
-    console.log(index);
-    fetchPosts()
-        .then((breedId) => {
-           console.log(breedId);
-    return breedId; 
-        } )
+  loaderMess.classList.remove('hide');
+  setTimeout(() => {
+  fetchPosts()
         .then((breedId) =>
         fetchCatByBreed(breedId))
-    .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        errorMess.classList.remove('hide');
+      });
+    loaderMess.classList.add('hide');
+}, 1000)
+  
 }
 
 
