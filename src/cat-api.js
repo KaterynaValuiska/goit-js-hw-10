@@ -1,3 +1,13 @@
+// import SlimSelect from 'slim-select'
+
+// const slimSelect = new SlimSelect({
+//     select: '.breed-select',
+//     // settings: { placeholder: true, text: 'placeholder text' },
+//     events: { afterChange: onSelectCat},
+// });
+
+
+
 const breedSelect = document.querySelector('.breed-select');
 const catInfo = document.querySelector('.cat-info');
 const loaderMess = document.querySelector('.loader');
@@ -24,23 +34,30 @@ function renderBreed(breeds) {
       `;
     })
     .join("");
+  // slimSelect.setData(markup);
   breedSelect.innerHTML = markup;
 }
 
    
 function onSelectCat() {
   loaderMess.classList.remove('hide');
+  catInfo.classList.add('hide');
   setTimeout(() => {
   fetchPosts()
-        .then((breedId) =>
-        fetchCatByBreed(breedId))
+    .then((breedId) => {
+      catInfo.classList.remove('hide');
+      fetchCatByBreed(breedId);
+        })
       .catch((error) => {
         console.log(error);
         errorMess.classList.remove('hide');
-      });
-    loaderMess.classList.add('hide');
-}, 1000)
-  
+      })
+    .finally(() => {
+      loaderMess.classList.add('hide');
+      
+    })
+    
+}, 500) 
 }
 
 
@@ -69,6 +86,7 @@ function fetchCatByBreed(breedId) {
         }
     })
     .join("");
+  
   catInfo.innerHTML = markup;
 }
 

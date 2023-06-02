@@ -1,4 +1,11 @@
 import { fetchBreeds, onSelectCat, catInfo, breedSelect  } from "./cat-api";
+// import SlimSelect from 'slim-select'
+
+// const slimSelect = new SlimSelect({
+//     select: '.breed-select',
+//     settings: { placeholder: true, text: 'placeholder text' },
+//     events: { afterChange: onSelectCat},
+// });
 
 const loaderMess = document.querySelector('.loader');
 const errorMess = document.querySelector('.error');
