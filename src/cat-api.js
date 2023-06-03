@@ -25,7 +25,7 @@ function fetchBreeds() {
             renderBreed(breeds);
         }).catch((error) => console.log(error))
       .finally(() => {
-      loaderMess.classList.add('hide');
+    
     });
 };
 
@@ -78,9 +78,6 @@ function fetchCatByBreed(breedId) {
 
 function onSelectCat() {
   loaderMess.classList.remove('hide');
-  errorMess.classList.add('hide');
-  catInfo.classList.add('hide');
-  catInfo.innerHTML = '';
   setTimeout(() => {
   fetchPosts()
     .then((breedId) => {
@@ -91,7 +88,7 @@ function onSelectCat() {
         errorMess.classList.remove('hide');
       })
     .finally(() => {
-      loaderMess.classList.remove('hide');
+      loaderMess.classList.add('hide');
     }) 
 }, 500) 
 }
