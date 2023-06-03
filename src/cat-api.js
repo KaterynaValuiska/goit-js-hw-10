@@ -23,7 +23,10 @@ function fetchBreeds() {
         }
         ).then(breeds => {
             renderBreed(breeds);
-        }).catch((error) => console.log(error));
+        }).catch((error) => console.log(error))
+      .finally(() => {
+      loaderMess.classList.add('hide');
+    });
 };
 
 function renderBreed(breeds) {
@@ -38,31 +41,14 @@ function renderBreed(breeds) {
   breedSelect.innerHTML = markup;
 }
 
-   
-function onSelectCat() {
-  loaderMess.classList.remove('hide');
-  catInfo.classList.add('hide');
-  setTimeout(() => {
-  fetchPosts()
-    .then((breedId) => {
-      catInfo.classList.remove('hide');
-      fetchCatByBreed(breedId);
-        })
-      .catch((error) => {
-        console.log(error);
-        errorMess.classList.remove('hide');
-      })
-    .finally(() => {
-      loaderMess.classList.add('hide');
-      
-    })
-    
-}, 500) 
-}
-
-
 function fetchPosts() {
-    return fetch("https://api.thecatapi.com/v1/images/search?breed_ids=beng&api_key=live_R01pkXHrQNXKQvYeJccUarYSnPmiUXkBylskayNCHe0VBB6reFt08aZBMVBfbdKf")
+  const searchParams = new URLSearchParams({
+  breed_ids: "beng",
+  api_key: "live_R01pkXHrQNXKQvYeJccUarYSnPmiUXkBylskayNCHe0VBB6reFt08aZBMVBfbdKf",
+  });
+  const urlCat = `https://api.thecatapi.com/v1/images/search?${searchParams}`;
+
+    return fetch(urlCat)
         .then((response) => {
       if (!response.ok) {
         throw new Error(response.status);
@@ -90,5 +76,24 @@ function fetchCatByBreed(breedId) {
   catInfo.innerHTML = markup;
 }
 
+function onSelectCat() {
+  loaderMess.classList.remove('hide');
+  errorMess.classList.add('hide');
+  catInfo.classList.add('hide');
+  catInfo.innerHTML = '';
+  setTimeout(() => {
+  fetchPosts()
+    .then((breedId) => {
+      fetchCatByBreed(breedId);
+        })
+      .catch((error) => {
+        console.log(error);
+        errorMess.classList.remove('hide');
+      })
+    .finally(() => {
+      loaderMess.classList.remove('hide');
+    }) 
+}, 500) 
+}
 
-export { fetchBreeds, onSelectCat, catInfo, breedSelect }
+export { fetchBreeds, onSelectCat, breedSelect }

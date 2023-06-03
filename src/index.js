@@ -1,4 +1,4 @@
-import { fetchBreeds, onSelectCat, catInfo, breedSelect  } from "./cat-api";
+import { fetchBreeds, onSelectCat, breedSelect  } from "./cat-api";
 // import SlimSelect from 'slim-select'
 
 // const slimSelect = new SlimSelect({
@@ -12,6 +12,8 @@ const errorMess = document.querySelector('.error');
 
 loaderMess.classList.add('hide');
 errorMess.classList.add('hide');
+
+
 fetchBreeds();
 
 breedSelect.addEventListener('change', onSelectCat)
