@@ -78,6 +78,8 @@ function fetchCatByBreed(breedId) {
 
 function onSelectCat() {
   loaderMess.classList.remove('hide');
+  catInfo.classList.add('hide');
+  catInfo.innerHTML = '';
   setTimeout(() => {
   fetchPosts()
     .then((breedId) => {
@@ -88,7 +90,9 @@ function onSelectCat() {
         errorMess.classList.remove('hide');
       })
     .finally(() => {
+      catInfo.classList.remove('hide');
       loaderMess.classList.add('hide');
+      
     }) 
 }, 500) 
 }
