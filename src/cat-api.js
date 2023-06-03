@@ -2,7 +2,7 @@
 
 // const slimSelect = new SlimSelect({
 //     select: '.breed-select',
-//     // settings: { placeholder: true, text: 'placeholder text' },
+//     settings: { placeholder: true, text: 'placeholder text' },
 //     events: { afterChange: onSelectCat},
 // });
 
@@ -22,7 +22,8 @@ function fetchBreeds() {
             return response.json();
         }
         ).then(breeds => {
-            renderBreed(breeds);
+          renderBreed(breeds);
+          
         }).catch((error) => console.log(error))
       .finally(() => {
     
@@ -37,6 +38,11 @@ function renderBreed(breeds) {
       `;
     })
     .join("");
+  // markup.unshift({
+  //       placeholder: true,
+  //       value: 'none',
+  //       text: 'make your selection',
+  //     });
   // slimSelect.setData(markup);
   breedSelect.innerHTML = markup;
 }
