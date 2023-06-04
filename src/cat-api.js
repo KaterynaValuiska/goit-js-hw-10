@@ -1,8 +1,9 @@
+import Notiflix from 'notiflix';
+
 // import SlimSelect from 'slim-select'
 
 // const slimSelect = new SlimSelect({
 //     select: '.breed-select',
-//     settings: { placeholder: true, text: 'placeholder text' },
 //     events: { afterChange: onSelectCat},
 // });
 
@@ -11,7 +12,9 @@
 const breedSelect = document.querySelector('.breed-select');
 const catInfo = document.querySelector('.cat-info');
 const loaderMess = document.querySelector('.loader');
-const errorMess = document.querySelector('.error');
+// const errorMess = document.querySelector('.error');
+
+
 
 function fetchBreeds() {
     fetch("https://api.thecatapi.com/v1/breeds")
@@ -24,7 +27,10 @@ function fetchBreeds() {
         ).then(breeds => {
           renderBreed(breeds);
           
-        }).catch((error) => console.log(error))
+        }).catch((error) => {
+          console.log(error);
+          errorShow();
+})
       .finally(() => {
     
     });
@@ -38,6 +44,7 @@ function renderBreed(breeds) {
       `;
     })
     .join("");
+    
   // markup.unshift({
   //       placeholder: true,
   //       value: 'none',
@@ -93,7 +100,7 @@ function onSelectCat() {
         })
       .catch((error) => {
         console.log(error);
-        errorMess.classList.remove('hide');
+        errorShow();
       })
     .finally(() => {
       catInfo.classList.remove('hide');
@@ -103,4 +110,8 @@ function onSelectCat() {
 }, 500) 
 }
 
+function errorShow() {
+  Notify.failure('Oops! Something went wrong! Try reloading the page!');
+}
 export { fetchBreeds, onSelectCat, breedSelect }
+

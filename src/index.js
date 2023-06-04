@@ -3,7 +3,6 @@ import { fetchBreeds, onSelectCat, breedSelect  } from "./cat-api";
 
 // const slimSelect = new SlimSelect({
 //     select: '.breed-select',
-//     settings: { placeholder: true, text: 'placeholder text' },
 //     events: { afterChange: onSelectCat},
 // });
 
