@@ -53,9 +53,8 @@ function onSelectCat(evt) {
   catInfo.classList.add('hide');
     catInfo.innerHTML = '';
 
-    // хочу тут присвоїти breedId індетифікатор вибраного кота, але як?
     let breedId = evt.target.value;
-    console.log(evt.target.value);
+    // console.log(evt.target.value);
   
   fetchPosts(breedId)
     .then((breedId) => {
