@@ -48,14 +48,14 @@ function renderBreed(breeds) {
 
 breedSelect.addEventListener('change', onSelectCat)
 
-function onSelectCat(val) {
+function onSelectCat(evt) {
   loaderMess.classList.remove('hide');
   catInfo.classList.add('hide');
     catInfo.innerHTML = '';
 
-    console.log(val[0]);
     // хочу тут присвоїти breedId індетифікатор вибраного кота, але як?
-    breedId = 'abys';
+    let breedId = evt.target.value;
+    console.log(evt.target.value);
   
   fetchPosts(breedId)
     .then((breedId) => {
@@ -87,8 +87,9 @@ function fetchCatByBreed(breedId) {
         }
     })
     .join("");
-  
-  catInfo.innerHTML = markup;
+    
+    catInfo.innerHTML = markup;
+
 }
 
 
