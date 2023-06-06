@@ -54,7 +54,7 @@ function onSelectCat(val) {
     catInfo.innerHTML = '';
 
     console.log(val[0]);
-    
+    // хочу тут присвоїти breedId індетифікатор вибраного кота, але як?
     breedId = 'abys';
   
   fetchPosts(breedId)
