@@ -1,5 +1,5 @@
 import { fetchBreeds, fetchPosts } from "./cat-api";
-// import Notiflix from 'notiflix';
+import Notiflix from 'notiflix';
 // import SlimSelect from 'slim-select'
 
 // const slimSelect = new SlimSelect({
@@ -55,11 +55,15 @@ function onSelectCat(evt) {
 
     let breedId = evt.target.value;
     // console.log(evt.target.value);
-  
+    
   fetchPosts(breedId)
-    .then((breedId) => {
-        console.log(breedId);
-      fetchCatByBreed(breedId);
+      .then((breedId) => {
+          console.log(breedId);
+          if (breedId.length === 0) {
+              errorShow();;
+              return;
+        }
+        fetchCatByBreed(breedId); 
         })
       .catch((error) => {
         console.log(error);
@@ -88,11 +92,11 @@ function fetchCatByBreed(breedId) {
     .join("");
     
     catInfo.innerHTML = markup;
-
+    
 }
 
 
 
 function errorShow() {
-  Notify.failure('Oops! Something went wrong! Try reloading the page!');
+  Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
 }
